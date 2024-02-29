@@ -6,33 +6,49 @@ if (isset($_POST['tambah'])) {
     $tanggal = $_POST['tanggal'];
     $nama = $_POST['nama'];
     $nomeja = $_POST['nomeja'];
-
-    $sql = $koneksi->query("INSERT INTO penjualan (TanggalPenjualan) VALUES ('$tanggal')");
-    $id_transaksi_baru = mysqli_insert_id($koneksi);
-    
-    $sql = $koneksi->query("INSERT INTO pelanggan (PelangganID, NamaPelanggan, NoMeja) VALUES ('$id_transaksi_baru', '$nama', '$nomeja')");
-    $id_pelanggan_baru = mysqli_insert_id($koneksi);
-    
     $menu_jumlah = $_POST['menu'];
     $jumlah_array = $_POST['jumlah'];
+    $stok = true;
+
     foreach ($menu_jumlah as $i => $item) {
-        $item_parts = explode("|", $item);
-        $produk_id = $item_parts[0];
-        $harga = $item_parts[1];
+        $parts = explode("|", $item);
+        $produk_id = $parts[0];
+        $harga = $parts[1];
         $jumlah = $jumlah_array[$i];
 
-        $sql3 = $koneksi->query("INSERT INTO detailpenjualan (DetailID, ProdukID, JumlahProduk, Subtotal) VALUES ('$id_transaksi_baru', '$produk_id', '$jumlah', '$harga')");
-        $sql4 = $koneksi->query("UPDATE produk SET Stok = Stok - $jumlah  WHERE ProdukID = '$produk_id'");
-        $sql5 = $koneksi->query("UPDATE produk SET Terjual = Terjual + $jumlah WHERE ProdukID = '$produk_id'");
+        $sql_stok = $koneksi->query("SELECT Stok FROM produk WHERE ProdukID = '$produk_id'");
+        $row = $sql_stok->fetch_assoc();
+        $stok_produk = $row['Stok'];
+
+        if ($jumlah > $stok_produk) {
+            $stok = false;
+            break;
+        }
     }
+    if ($stok) {
+        $sql = $koneksi->query("INSERT INTO penjualan (TanggalPenjualan) VALUES ('$tanggal')");
+        $id_transaksi_baru = mysqli_insert_id($koneksi);
 
-    header("Location: daftar-transaksi.php");
-    exit();
+        $sql = $koneksi->query("INSERT INTO pelanggan (PelangganID, NamaPelanggan, NoMeja) VALUES ('$id_transaksi_baru', '$nama', '$nomeja')");
+
+        foreach ($menu_jumlah as $i => $item) {
+            $parts = explode("|", $item);
+            $produk_id = $parts[0];
+            $harga = $parts[1];
+            $jumlah = $jumlah_array[$i];
+
+            $sql3 = $koneksi->query("INSERT INTO detailpenjualan (DetailID, ProdukID, JumlahProduk, Subtotal) VALUES ('$id_transaksi_baru', '$produk_id', '$jumlah', '$harga')");
+            $sql4 = $koneksi->query("UPDATE produk SET Stok = Stok - $jumlah  WHERE ProdukID = '$produk_id'");
+            $sql5 = $koneksi->query("UPDATE produk SET Terjual = Terjual + $jumlah WHERE ProdukID = '$produk_id'");
+            
+        }
+        header("Location: daftar-transaksi.php");
+        exit();
+    } else {
+        echo "<script>alert('Maaf, jumlah pesanan melebihi stok yang tersedia. Silakan periksa kembali pesanan Anda.')</script>";
+    }
 }
-
-
 ?>
-
   
         <script>
             // Fungsi untuk menambahkan input field untuk menu
@@ -128,4 +144,4 @@ if (isset($_POST['tambah'])) {
           </div>
         </div>
       </body>
-    </html>
+    </html>

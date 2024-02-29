@@ -10,7 +10,7 @@ include("header.php");
 <body>
       <nav class="navbar navbar-expand-lg navbar-primary bg-primary fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Kasir</a>
+            <a class="navbar-brand" href="#">Pelaenggan</a>
             <div class="navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -28,15 +28,15 @@ include("header.php");
           <div class="card mt-5">
             <div class="card-body">
             <table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>No</th>
-				<th>Tanggal Transaksi</th>
-        <th>Nama Pemesan</th>
-				<th>Menu</th>	
-			</tr>
-		</thead>
-		<tbody>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Tanggal Transaksi</th>
+                <th>Nama Pemesan</th>
+        <th>Menu</th> 
+      </tr>
+    </thead>
+    <tbody>
         <?php
             include("koneksi/koneksi.php");
 
@@ -107,10 +107,10 @@ include("header.php");
             }
               
         ?>
-		</tbody>
-	</table>
+    </tbody>
+  </table>
   <a href="cetak-transaksi.php" target="_blank" class="btn btn-md btn-success float-end">Cetak Transaksi</a>
             </div>
           </div>
-        </div>
+        </div>
 </body>

@@ -3,19 +3,20 @@ session_start();
 include "../koneksi/koneksi.php";
 
 $User = $_SESSION['Username'];
+$Level = $_SESSION['Level'];
 if ($_SESSION['Username']=="") {
-    header("Location: login.php");
+  header("Location: login.php");
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>KASIR</title>
+    <title>KASIR</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../bootstrap-5.3.2-dist/bootstrap.min.css">
-    <script src="../bootstrap-5.3.2-dist new/jquery.min.js"></script>
-    <script src="../bootstrap-5.3.2-dist new/bootstrap.min.js"></script>
+    <script src="../bootstrap-5.3.2-dist/jquery.min.js"></script>
+    <script src="../bootstrap-5.3.2-dist/bootstrap.min.js"></script>
     <style>
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
         .row.content {height: 640px}
@@ -32,18 +33,18 @@ if ($_SESSION['Username']=="") {
         .row.content {height: auto;} 
         }
     </style>
-  </head>
+</head>
 <body>
 
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav hidden-xs">
-      <h2><?php echo $_SESSION['Level'] ?></h2>
+      <h2><?php echo $Level ?></h2>
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="index.php">Dashboard</a></li>
         <li><a href="?page=stok">Stok</a></li>
         <li><a href="?page=user">User</a></li>
-        <li><a href="?page=logout">Log Out</a></li>
+        <li><a href="logout.php">Log Out</a></li>
       </ul><br>
     </div>
     <br>
@@ -65,30 +66,30 @@ if ($_SESSION['Username']=="") {
                     case 'logout':
                         include "logout.php";
                         break;
-                
+
                     case 'tambah-user':
                         include "tambah-user.php";
-                        break;
-
-                    case 'edit-user':
-                        include "edit-user.php";
                         break;
 
                     case 'hapus-user':
                         include "hapus-user.php";
                         break;
 
-                     case 'tambah-barang':
+                    case 'tambah-barang':
                         include "tambah-barang.php";
                         break;
 
-                     case 'edit-barang':
+                    case 'hapus-barang':
+                        include "hapus-barang.php";
+                        break;
+
+                    case 'edit-barang':
                         include "edit-barang.php";
                         break;
 
-                     case 'hapus-barang':
-                         include "hapus-barang.php";
-                         break;
+                    case 'edit-user':
+                        include "edit-user.php";
+                        break;
                     default:
                         # code...
                         break;

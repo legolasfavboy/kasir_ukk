@@ -16,7 +16,7 @@ if (isset($_POST['tambah'])) {
 
   // File upload handling
   if (move_uploaded_file($_FILES["foto"]["tmp_name"], $targetfile)) {
-      $sql = "INSERT INTO produk (ProdukID, NamaProduk, Harga, Stok, Foto) VALUES ('$id', '$nama', '$harga', $stok, '$filename')";
+      $sql = "INSERT INTO produk (ProdukID, NamaProduk, Harga, Stok, Foto) VALUES ('$id','$nama', '$harga', $stok, '$filename')";
       if ($koneksi->query($sql) === TRUE) {
           echo "<script>alert('Berhasil menambahkan produk');window.location.href='?page=stok';</script>";
           exit();
@@ -39,10 +39,10 @@ if (isset($_POST['tambah'])) {
                 <div class="container mt-5">
                     <h2>Tambah Produk Baru</h2>
                     <form action="" method="POST" class="col-md-10" enctype="multipart/form-data">
-                    <div class="mb-3">
+                        <div class="mb-3">
                             <label for="id" class="form-label">ID Produk<span style="color: red;"> *</span></label>
                             <input type="text" class="form-control" id="id" name="id" required>
-                        </div>
+                        </div>
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Produk<span style="color: red;"> *</span></label>
                             <input type="text" class="form-control" id="nama" name="nama" required>
@@ -69,4 +69,4 @@ if (isset($_POST['tambah'])) {
             </div>
           </div>
         </div>
-      </body>
+    </body>

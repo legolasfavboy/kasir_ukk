@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aplikasi Kasir</title>
-  <link href="bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Struk Transaksi</title>
+  <link href="bootstrap-5.3.2-dist new/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
         <div class="p-4 main-content">
-          
           <div class="card col-6">
             <div class="card-body">
-              <p style="text-align: center">Cetak Menu</p>
+              <p style="text-align: center">STRUK PEMBAYARAN</p>
             ============================
         <?php
             include("koneksi/koneksi.php");
@@ -80,7 +79,7 @@
             ============================
             <p style="text-align: center"><?php  echo date('d-m-Y H:i:s'); ?></p>
             ============================
-            <p style="text-align: center">Kritik & Saran Whatsapp: 0895324998416</p>
+            <p style="text-align: center">Kritik & Saran Whatsapp: 0895358294842</p>
             </div>
           </div>
         </div>
